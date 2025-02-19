@@ -14,16 +14,34 @@ class ImageUploadRepository {
   /// Upload an image asset to Firebase Storage and returns the download URL
   Future<String> uploadProductImageFromAsset(
       String assetPath, ProductID productId) async {
-    // TODO: Implement
-    throw UnimplementedError();
+    // Charge les données de l'image à partir du chemin d'accès de l'actif
+    final byteData = await rootBundle.load(assetPath);
+
+    // Divise le chemin d'accès de l'actif en composants
+    final components = assetPath.split('/');
+
+    // Récupère le nom du fichier à partir des composants du chemin d'accès
+    final fileName = components[2];
+
+    // Télécharge les données de l'image vers Firebase Storage
+    final result = await _uploadAsset(byteData, fileName);
+
+    // Retourne l'URL de téléchargement de l'image
+    return result.ref.getDownloadURL();
   }
 
   UploadTask _uploadAsset(ByteData byteData, String filename) {
+    // Convertit les données de l'image en un tableau d'octets
     final bytes = byteData.buffer
         .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
+
+    // Crée une référence à Firebase Storage en utilisant le chemin 'products/$filename'
     final ref = _storage.ref('products/$filename');
+
+    // Télécharge les données de l'image vers Firebase Storage
     return ref.putData(
       bytes,
+      // Définit les métadonnées du fichier, ici le type de contenu est 'image/jpeg'
       SettableMetadata(contentType: 'image/jpeg'),
     );
   }
