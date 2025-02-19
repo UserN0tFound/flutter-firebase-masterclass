@@ -100,8 +100,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Firebase: cf1b19f21410b029b6786a54e9764a0cacad3c99
-  firebase_auth: 42718683069d35d73af7a986b55b194589039e5e
-  firebase_core: 9efc3ecf689cdbc90f13f4dc58108c83ea46b266
+  firebase_auth: 5e5e0292aaa2dfd306102095f182176700014b51
+  firebase_core: 84a16d041be8bc166b6e00350f89849e06daf9d1
   FirebaseAppCheckInterop: d265d9f4484e7ec1c591086408840fdd383d1213
   FirebaseAuth: c359af98bd703cbf4293eec107a40de08ede6ce6
   FirebaseAuthInterop: 1219bee9b23e6ebe84c256a0d95adab53d11c331
@@ -111,10 +111,10 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
   GTMSessionFetcher: 923b710231ad3d6f3f0495ac1ced35421e07d9a6
-  integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
-  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
+  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-  sqflite_darwin: 5a7236e3b501866c1c9befc6771dfd73ffb8702d
+  sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
 
 PODFILE CHECKSUM: a57f30d18f102dd3ce366b1d62a55ecbef2158e5
 
