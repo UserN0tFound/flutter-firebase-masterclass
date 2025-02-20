@@ -1,13 +1,18 @@
+import 'package:ecommerce_app/src/features/products/data/products_repository.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/features/products_admin/data/image_upload_repository.dart';
+import 'package:ecommerce_app/src/routing/app_router.dart';
+import 'package:ecommerce_app/src/utils/notifier_mounted.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'admin_product_upload_controller.g.dart';
 
 @riverpod
-class AdminProductUploadController extends _$AdminProductUploadController {
+class AdminProductUploadController extends _$AdminProductUploadController
+    with NotifierMounted {
   @override
   FutureOr<void> build() {
+    ref.onDispose(setUnmounted);
     // no-op
   }
 
@@ -21,15 +26,18 @@ class AdminProductUploadController extends _$AdminProductUploadController {
           .read(imageUploadRepositoryProvider)
           .uploadProductImageFromAsset(product.imageUrl, product.id);
 
-      // TODO: Enregistrer l'URL de téléchargement dans Firestore
+      await ref
+          .read(productsRepositoryProvider)
+          .createProduct(product.id, downloadUrl);
 
-      // Met à jour l'état pour indiquer que le téléchargement est terminé avec succès
-      state = const AsyncData(null);
-
-      // TODO: En cas de succès, rediriger vers la page de modification du produit
+      ref.read(goRouterProvider).goNamed(AppRoute.adminEditProduct.name,
+          pathParameters: {'id': product.id});
     } on Exception catch (e, st) {
-      // Met à jour l'état pour indiquer qu'une erreur s'est produite
-      state = AsyncError(e, st);
+      // pas recommander d'utiliser mounted comme ça pour riverpod mais dans ce cas de figure ça fonctionne
+      if (mounted) {
+        // Met à jour l'état pour indiquer qu'une erreur s'est produite
+        state = AsyncError(e, st);
+      }
     }
   }
 }
