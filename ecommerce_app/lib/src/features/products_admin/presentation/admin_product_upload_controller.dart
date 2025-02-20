@@ -12,24 +12,24 @@ class AdminProductUploadController extends _$AdminProductUploadController {
   }
 
   Future<void> uploadProduct(Product product) async {
-  try {
-    // Met à jour l'état pour indiquer que le téléchargement est en cours
-    state = const AsyncLoading();
-    
-    // Télécharge l'image du produit vers Firebase Storage et obtient l'URL de téléchargement
-    final downloadUrl = await ref
-        .read(imageUploadRepositoryProvider)
-        .uploadProductImageFromAsset(product.imageUrl, product.id);
-    
-    // TODO: Enregistrer l'URL de téléchargement dans Firestore
-    
-    // Met à jour l'état pour indiquer que le téléchargement est terminé avec succès
-    state = const AsyncData(null);
-    
-    // TODO: En cas de succès, rediriger vers la page de modification du produit
-  } on Exception catch (e, st) {
-    // Met à jour l'état pour indiquer qu'une erreur s'est produite
-    state = AsyncError(e, st);
+    try {
+      // Met à jour l'état pour indiquer que le téléchargement est en cours
+      state = const AsyncLoading();
+
+      // Télécharge l'image du produit vers Firebase Storage et obtient l'URL de téléchargement
+      final downloadUrl = await ref
+          .read(imageUploadRepositoryProvider)
+          .uploadProductImageFromAsset(product.imageUrl, product.id);
+
+      // TODO: Enregistrer l'URL de téléchargement dans Firestore
+
+      // Met à jour l'état pour indiquer que le téléchargement est terminé avec succès
+      state = const AsyncData(null);
+
+      // TODO: En cas de succès, rediriger vers la page de modification du produit
+    } on Exception catch (e, st) {
+      // Met à jour l'état pour indiquer qu'une erreur s'est produite
+      state = AsyncError(e, st);
+    }
   }
-}
 }
