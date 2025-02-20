@@ -68,7 +68,7 @@ class AdminProductUpload extends ConsumerWidget {
                       ? null
                       : () => ref
                           .read(adminProductUploadControllerProvider.notifier)
-                          .uploadProduct(templateProduct),
+                          .upload(templateProduct),
                 ),
               ] else
                 ErrorMessageWidget(

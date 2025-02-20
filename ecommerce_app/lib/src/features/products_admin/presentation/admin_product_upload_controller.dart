@@ -16,7 +16,7 @@ class AdminProductUploadController extends _$AdminProductUploadController
     // no-op
   }
 
-  Future<void> uploadProduct(Product product) async {
+  Future<void> upload(Product product) async {
     try {
       // Met à jour l'état pour indiquer que le téléchargement est en cours
       state = const AsyncLoading();
