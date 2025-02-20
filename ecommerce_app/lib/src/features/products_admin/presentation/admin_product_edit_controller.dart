@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/src/features/products/data/products_repository.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
+import 'package:ecommerce_app/src/features/products_admin/application/image_upload_service.dart';
 import 'package:ecommerce_app/src/routing/app_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -39,5 +40,19 @@ class AdminProductEditController extends _$AdminProductEditController {
       ref.read(goRouterProvider).pop();
     }
     return success;
+  }
+
+  Future<void> deleteProduct(Product product) async {
+    final imageUploadService = ref.read(imageUploadServiceProvider);
+
+    state = const AsyncLoading();
+
+    await AsyncValue.guard(() => imageUploadService.deleteProduct(product));
+
+    final success = state.hasError == false;
+
+    if (success) {
+      ref.read(goRouterProvider).pop();
+    }
   }
 }

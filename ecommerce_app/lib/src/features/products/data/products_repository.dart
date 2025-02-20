@@ -43,10 +43,14 @@ class ProductsRepository {
   }
 
   Future<void> updateProduct(Product product) {
-  final ref = _productRef(product.id);
+    final ref = _productRef(product.id);
 
-  return ref.set(product);
-}
+    return ref.set(product);
+  }
+
+  Future<void> deleteProduct(ProductID id) {
+    return _firestore.doc(productPath(id)).delete();
+  }
 
   DocumentReference<Product> _productRef(ProductID id) =>
       _firestore.doc(productPath(id)).withConverter(
@@ -76,8 +80,6 @@ class ProductsRepository {
         .toList();
   }
 }
-
-
 
 @Riverpod(keepAlive: true)
 ProductsRepository productsRepository(Ref ref) {

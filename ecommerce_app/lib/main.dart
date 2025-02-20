@@ -11,7 +11,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // turn off the # in the URLs on the web
+  // turn off the # in the URLs on the web 
   usePathUrlStrategy();
   // create an app bootstrap instance
   final appBootstrap = AppBootstrap();
